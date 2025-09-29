@@ -3,6 +3,18 @@ X-Watcher
 
 One more (pure) C file handling lib, all contained within a single header file
 
+## Notice: If you just updated the git submodule and your build broke.
+
+Its because of [#4](https://github.com/nikp123/x-watcher/pull/4). I felt it was
+better to be more technically correct on this than keeping an incompatible directory
+structure going.
+
+All you'll need to do is to add include folder inside of this repo as a include
+search path and change ``"x-watcher.h"`` includes into ``<x-watcher/x-watcher.h>``.
+
+Sorry for the slight inconvenience :/
+
+
 ### What does it (or doesn't) support?
 
  * [x] Microsoft Windows (starting from XP)
@@ -23,8 +35,8 @@ One more (pure) C file handling lib, all contained within a single header file
 
 Include ```-lpthread``` in your linker and add the following two files
 in your project's sources:
- * [array.h](array.h) - as an hard dependency to ```x-watcher.h```
- * [x-watcher.h](x-watcher.h)
+ * [include/x-watcher/array.h](include/x-watcher/array.h) - as an hard dependency to ```x-watcher.h```
+ * [include/x-watcher/x-watcher.h](include/x-watcher/x-watcher.h)
 
 ### How do I use it?
 
@@ -129,7 +141,7 @@ Since this program supports two backends: inotify and WinAPI, some features
            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                    Version 2, December 2004
  
-Copyright (C) 2021 Nikola Pavlica <pavlica.nikola at gmail dot com>
+Copyright (C) 2021 Nikola Pavlica <nikp123 at e dot email>
 
 Everyone is permitted to copy and distribute verbatim or modified
 copies of this license document, and changing it is allowed as long
