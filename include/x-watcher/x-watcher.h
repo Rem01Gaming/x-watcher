@@ -174,12 +174,9 @@ typedef struct x_watcher {
 
 				if(event->mask & IN_CREATE)
 					send_event = XWATCHER_FILE_CREATED;
-				if(event->mask & IN_MODIFY)
+				if(event->mask & IN_CLOSE_WRITE)
 					send_event = XWATCHER_FILE_MODIFIED;
-				if(event->mask & IN_DELETE)
-					send_event = XWATCHER_FILE_REMOVED;
-				if(event->mask & IN_CLOSE_WRITE ||
-						event->mask & IN_CLOSE_NOWRITE)
+				if(event->mask & IN_DELETE_SELF)
 					send_event = XWATCHER_FILE_REMOVED;
 				if(event->mask & IN_ATTRIB)
 					send_event = XWATCHER_FILE_ATTRIBUTES_CHANGED;
