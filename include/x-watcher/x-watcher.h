@@ -20,10 +20,14 @@ typedef enum event {
 	XWATCHER_FILE_CREATED,
 	XWATCHER_FILE_MODIFIED,
 	XWATCHER_FILE_OPENED,
+	XWATCHER_FILE_MOVED,
 	XWATCHER_FILE_ATTRIBUTES_CHANGED,
 	XWATCHER_FILE_NONE,
 	XWATCHER_FILE_RENAMED,
-	// probs more but i couldn't care much
+
+	// directory specific events
+	XWATCHER_DIRECTORY_CONTENT_REMOVED,
+	XWATCHER_DIRECTORY_CONTENT_MOVED,
 } XWATCHER_FILE_EVENT;
 
 typedef struct xWatcher_reference {
@@ -178,6 +182,12 @@ typedef struct x_watcher {
 					send_event = XWATCHER_FILE_MODIFIED;
 				if(event->mask & IN_DELETE_SELF)
 					send_event = XWATCHER_FILE_REMOVED;
+				if(event->mask & IN_MOVE_SELF)
+					send_event = XWATCHER_FILE_MOVED;
+				if(event->mask & IN_DELETE)
+					send_event = XWATCHER_DIRECTORY_CONTENT_REMOVED;
+				if(event->mask & IN_MOVED)
+					send_event = XWATCHER_DIRECTORY_CONTENT_MOVED;
 				if(event->mask & IN_ATTRIB)
 					send_event = XWATCHER_FILE_ATTRIBUTES_CHANGED;
 				if(event->mask & IN_OPEN)
